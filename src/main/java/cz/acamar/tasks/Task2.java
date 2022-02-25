@@ -18,6 +18,48 @@ public class Task2 {
      * @return - an array of the squares of each number sorted in non-decreasing order
      */
     public int[] squaresOfSortedArray(int[] input) {
-        return null;
+        // just in case the life on planet Earth will depend on time complexity of this task...
+        // in any other circumstances will be using Arrays.stream(input).map(i -> i*i).sorted().toArray() ;-)
+
+        var len = input.length;
+        var result = new int[len];
+        var mid = 0;
+
+        for (mid = 0; mid < len; mid++) {
+            if (input[mid] > 0) {
+                break;
+            }
+        }
+
+        var i = mid - 1;
+        var j = mid;
+        var idx = 0;
+
+        while (i >= 0 && j < len) {
+            var si = input[i]*input[i];
+            var sj = input[j]*input[j];
+
+            if (si < sj) {
+                result[idx] = si;
+                i--;
+            } else {
+                result[idx] = sj;
+                j++;
+            }
+
+            idx++;
+        }
+
+        while (i >= 0) {
+            result[idx++] = input[i]*input[i];
+            i--;
+        }
+
+        while (j < len) {
+            result[idx++] = input[j]*input[j];
+            j++;
+        }
+
+        return result;
     }
 }

@@ -17,6 +17,19 @@ public class Task1 {
      * @return - the length of the last word in the string.
      */
     public int lengthOfLastWord(String str) {
-        return 0;
+        var len = str.length();
+        var endPos = len;
+
+        for (var i = len - 1; i >= 0 && Character.isSpaceChar(str.charAt(i)); i--) {
+            endPos = i;
+        }
+
+        for (var i = endPos - 1; i >= 0; i--) {
+            if (Character.isSpaceChar(str.charAt(i))) {
+                return endPos - i - 1;
+            }
+        }
+
+        return len;
     }
 }
